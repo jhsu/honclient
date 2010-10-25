@@ -8,7 +8,7 @@
 #
 # DEPENDENCIES
 #   Requires rubygems
-#            rexml
+#            nokogiri
 #
 # USAGE:
 #   require 'hon'
@@ -22,11 +22,10 @@
 
 
 module HoN
-	require 'net/http'
-	require 'rubygems'
-	require 'rexml/document'
-	require 'lib/stats.rb'
-	require 'lib/player_stats.rb'
-	require 'lib/match_stats.rb'
-	require 'lib/player_hero_stats.rb'
+  require 'net/http'
+  require 'nokogiri'
+  require './lib/stats.rb'
+  require './lib/player_stats.rb'
+  require './lib/match_stats.rb'
+  # require './lib/player_hero_stats.rb'
 end
