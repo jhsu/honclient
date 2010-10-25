@@ -2,17 +2,17 @@ module HoN
   class PlayerHeroStats < Stats
     def initialize(nickname)
       @nickname = nickname
-      @heroes = Hash.new
+      @heroes = {}
       begin
         url = "http://xml.heroesofnewerth.com/xml_requester.php?f=player_hero_stats&opt=nick&nick[]=#{@nickname}"
         xml_data = Net::HTTP.get_response(URI.parse(url)).body
-        data = REXML::Document.new(xml_data)
-        data.elements.each("/xmlRequest/stats/player_hero_stats/hero") do |hero|
-          temp = Hash.new
-          hero.elements.each do |stat|
-            temp[stat.attributes["name"]] = stat.text
+        data = Nokogiri::XML.new(xml_data)
+        data.xpath("//xmlRequest/stats/player_hero_stats/hero").each do |hero|
+          temp = {}
+          hero.children.each do |stat|
+            temp[stat["name"]] = stat.content
           end
-          @heroes.store(hero.attributes["cli_name"], temp)
+          @heroes[hero["cli_name"]] = temp
         end
       rescue SocketError
         @error = "Could not contact the Newerth XML API."

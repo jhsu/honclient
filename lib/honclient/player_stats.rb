@@ -1,7 +1,11 @@
 module HoN
   class PlayerStats < Stats
     MAPPINGS = {
-      :psr => "acc_pub_skill"
+      :psr     => "acc_pub_skill",
+      :kills   => "acc_herokills",
+      :assists => "acc_heroassists",
+      :deaths  => "acc_deaths",
+      :games   => "acc_games_played"
     }
 
     def initialize(nickname)
@@ -17,6 +21,14 @@ module HoN
       rescue SocketError
         @error = "Could not contact the Newerth XML API."
       end
+    end
+
+    def kdr
+      "#{(kills.to_f / deaths.to_f * 100).round / 100.0}:1"
+    end
+
+    def assists_per_game
+      (assists.to_f / games.to_f * 100).round / 100.0
     end
 
     MAPPINGS.each do |meth, key|

@@ -12,22 +12,22 @@ module HoN
         xml_data = Net::HTTP.get_response(URI.parse(url)).body
         data = Nokogiri::XML.new(xml_data)
         data.xpath('//xmlRequest/stats/match/summ/stat').each do |stat|
-          @summary_stats[stat.attributes["name"]] = stat.content
+          @summary_stats[stat["name"]] = stat.content
         end
         data.xpath("//xmlRequest/stats/match/team[@side=1]/stat").each do |stat|
-          @team_one_stats[stat.attributes["name"]] = stat.content
+          @team_one_stats[stat["name"]] = stat.content
         end
         data.xpath("//xmlRequest/stats/match/team[@side=2]/stat").each do |stat|
-          @team_two_stats[stat.attributes["name"]] = stat.content
+          @team_two_stats[stat["name"]] = stat.content
         end
         data.xpath("//xmlRequest/stats/match/match_stats/ms").each do |ms|
-          temp = Hash.new
+          temp = {}
           team = 0
           ms.children.each do |stat|
-            if stat.attr["name"] == "team"
+            if stat["name"] == "team"
               team = stat.content.to_i
             end
-            temp[stat.attr["name"]] = stat.content
+            temp[stat["name"]] = stat.content
           end
           if team == 1
             @team_one_players.push(temp)
