@@ -1,12 +1,13 @@
 module HoN
   class PlayerHeroStats < Stats
+    attr_accessor :heroes, :nickname
     def initialize(nickname)
       @nickname = nickname
       @heroes = {}
       begin
         url = "http://xml.heroesofnewerth.com/xml_requester.php?f=player_hero_stats&opt=nick&nick[]=#{@nickname}"
         xml_data = Net::HTTP.get_response(URI.parse(url)).body
-        data = Nokogiri::XML.new(xml_data)
+        data = Nokogiri::XML.parse(xml_data)
         data.xpath("//xmlRequest/stats/player_hero_stats/hero").each do |hero|
           temp = {}
           hero.children.each do |stat|
@@ -19,12 +20,8 @@ module HoN
       end
     end
 
-    def nickname
-      @nickname
-    end
-
-    def heroes
-      @heroes
+    def hero(name)
+      @heroes["Hero_#{name.capitalize}"]
     end
 
     def stats(hero,key)
