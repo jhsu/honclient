@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
 	s.name          = "honclient"
-	s.version       = "0.1"
+	s.version       = "0.2"
 	s.date          = Date.today.to_s
 	s.platform      = Gem::Platform::RUBY
 	s.summary       = "Heroes of Newerth api client"
