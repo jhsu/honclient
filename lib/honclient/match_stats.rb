@@ -10,7 +10,7 @@ module HoN
       begin
         url = "http://xml.heroesofnewerth.com/xml_requester.php?f=match_stats&opt=mid&mid[]=#{@match_id}"
         xml_data = Net::HTTP.get_response(URI.parse(url)).body
-        data = Nokogiri::XML.new(xml_data)
+        data = Nokogiri::XML.parse(xml_data)
         data.xpath('//xmlRequest/stats/match/summ/stat').each do |stat|
           @summary_stats[stat["name"]] = stat.content
         end
