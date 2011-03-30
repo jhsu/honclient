@@ -35,7 +35,11 @@ module HoN
 
     def method_missing(meth, *args, &block)
       if @stats.has_key?(meth.to_s)
-        @stats[meth.to_s]
+        value = @stats[meth.to_s]
+        case value
+        when /^\d+/ then value.to_f
+        else value
+        end
       else
         super(meth, *args, &block)
       end
