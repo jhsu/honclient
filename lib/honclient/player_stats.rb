@@ -40,7 +40,6 @@ module HoN
     end
 
     def tsr
-      puts (rnk_herokills / rnk_deaths / 1.1 / 1.15) * 0.65
       tsr_value = ((rnk_herokills/rnk_deaths/1.1/1.15)*0.65)+
         ((rnk_heroassists/rnk_deaths/1.55)*1.20)+
         (((rnk_wins/(rnk_wins+rnk_losses))/0.55)*0.9)+
@@ -56,6 +55,8 @@ module HoN
       else
         tsr_value
       end.round(2)
+    rescue
+      0
     end
 
     def assists_per_game
