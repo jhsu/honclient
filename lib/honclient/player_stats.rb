@@ -12,7 +12,7 @@ module HoN
       @nickname = nickname
       @stats = {}
       begin
-        url = "http://xml.heroesofnewerth.com/xml_requester.php?f=player_stats&opt=nick&nick[]=#{@nickname}"
+        url = "http://xml.heroesofnewerth.com/xml_requester.php?f=player_stats&opt=nick&nick[]=#{CGI::escape(@nickname)}"
         xml_data = Net::HTTP.get_response(URI.parse(url)).body
         data = Nokogiri::XML.parse(xml_data)
         data.xpath("//xmlRequest/stats/player_stats/stat").each do |stat|

@@ -3,7 +3,7 @@ module HoN
     attr_accessor :clan_name, :tag, :cid, :members, :stats
     def initialize(tag)
       @stats = {}
-      url = "http://xml.heroesofnewerth.com/xml_requester.php?f=clan_roster&opt=tag&tag[]=#{tag}"
+      url = "http://xml.heroesofnewerth.com/xml_requester.php?f=clan_roster&opt=tag&tag[]=#{CGI::escape(tag)}"
       xml_data = Net::HTTP.get_response(URI.parse(url)).body
       data = Nokogiri::XML.parse(xml_data)
       if clan = data.xpath("//xmlRequest/clans/clan").first

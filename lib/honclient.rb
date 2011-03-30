@@ -4,6 +4,7 @@ $LOAD_PATH.unshift(libdir) unless $LOAD_PATH.include?(libdir)
 module HoN
   require 'net/http'
   require 'nokogiri'
+  require 'cgi'
   require 'honclient/stats'
   require 'honclient/player_stats'
   require 'honclient/match_stats'
