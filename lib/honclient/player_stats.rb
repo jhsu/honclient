@@ -1,3 +1,8 @@
+class String
+  def /(number)
+    self.to_i / number.to_i
+  end
+end
 module HoN
   class PlayerStats < Stats
     MAPPINGS = {
@@ -25,6 +30,17 @@ module HoN
 
     def kdr
       "#{(kills.to_f / deaths.to_f * 100).round / 100.0}:1"
+    end
+
+    def tsr
+      tsr_value = ((rnk_herokills/rnk_deaths/1.15)*0.65)+((rnk_heroassists/rnk_deaths/1.55)*1.20)+(((rnk_wins/(rnk_wins+rnk_losses))/0.55)*0.9)+(((rnk_gold/rnk_secs*60)/230)*(1-((230/195)*((rnk_em_played/rnk_games_played))))*0.35)+((((rnk_exp/rnk_time_earning_exp*60)/380)*(1-((380/565)*(rnk_em_played/rnk_games_played))))*0.40)+((((((rnk_denies/rnk_games_played)/12)*(1-((4.5/8.5)*(rnk_em_played/rnk_games_played))))*0.70)+((((rnk_teamcreepkills/rnk_games_played)/93)*(1-((63/81)*(rnk_em_played/rnk_games_played))))*0.50)+((rnk_wards/rnk_games_played)/1.45*0.30))*(37.5/(rnk_secs/rnk_games_played/60)))
+      if tsr_value > 10
+        10
+      elsif tsr_value < 0
+        0
+      else
+        tsr_value
+      end.round(2)
     end
 
     def assists_per_game
