@@ -1,6 +1,8 @@
 module HoN
   class Stats
     attr_accessor :stats
+    attr_reader :error
+    
     def nickname
       @stats["nickname"] || "Unknown"
     end
@@ -19,10 +21,6 @@ module HoN
       else
         false
       end
-    end
-
-    def error
-      @error
     end
 
     def method_missing(meth, *args, &block)
