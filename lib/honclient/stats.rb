@@ -16,11 +16,7 @@ module HoN
     end
 
     def error?
-      if defined? @error
-        true
-      else
-        false
-      end
+      !!@error
     end
 
     def method_missing(meth, *args, &block)
