@@ -37,7 +37,7 @@ module HoN
     end
 
     def dump_xml_stats
-      return @heroes
+      @heroes
     end
   end
 end

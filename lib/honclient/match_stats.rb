@@ -62,7 +62,7 @@ module HoN
       @team_two_stats[key] || 0
     end
     def dump_xml_stats
-      return @summary_stats, @team_one_stats, @team_two_stats, @team_one_players
+      [@summary_stats, @team_one_stats, @team_two_stats, @team_one_players]
     end
   end
 end
