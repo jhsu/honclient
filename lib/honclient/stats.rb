@@ -34,5 +34,9 @@ module HoN
         super(meth, *args, &block)
       end
     end
+    
+    def respond_to?(meth, *args, &block)
+      @stats.has_key?(meth.to_s) || super(meth, *args, &block)
+    end
   end
 end
