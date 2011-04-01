@@ -14,9 +14,9 @@ module HoN
         @tag = clan['tag']
       end
 
-      @members = data.xpath("//xmlRequest/clans/clan_roster/member").map {|member|
+      @members = data.xpath("//xmlRequest/clans/clan_roster/member").map do |member|
         member.children.select {|s| s['name'] == 'nickname' }.first.content
-      }
+      end
     end
 
     def ranking(by = :mmr)
