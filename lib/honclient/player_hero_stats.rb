@@ -27,14 +27,12 @@ module HoN
     end
 
     def stats(hero,key)
-      if !hero.empty?
-        if @heroes.has_key? hero
-          if @heroes[hero].has_key? key
-            @heroes[hero][key]
-          end
+      return 0 if hero.empty?
+
+      if @heroes.has_key? hero
+        if @heroes[hero].has_key? key
+          @heroes[hero][key]
         end
-      else
-        return 0
       end
     end
 
