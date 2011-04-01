@@ -53,25 +53,13 @@ module HoN
       end
     end
     def summary_stats(key)
-      if @summary_stats.has_key? key
-        @summary_stats[key]
-      else
-        return 0
-      end
+      @summary_stats[key] || 0
     end
     def team_one_stats(key)
-      if @team_one_stats.has_key? key
-        @team_one_stats[key]
-      else
-        return 0
-      end
+      @team_one_stats[key] || 0
     end
     def team_two_stats(key)
-      if @team_two_stats.has_key? key
-        @team_two_stats[key]
-      else
-        return 0
-      end
+      @team_two_stats[key] || 0
     end
     def dump_xml_stats
       return @summary_stats, @team_one_stats, @team_two_stats, @team_one_players

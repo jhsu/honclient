@@ -2,19 +2,11 @@ module HoN
   class Stats
     attr_accessor :stats
     def nickname
-      if @stats.has_key? "nickname"
-        @stats["nickname"]
-      else
-        "Unknown"
-      end
+      @stats["nickname"] || "Unknown"
     end
 
     def stat(key)
-      if @stats.has_key? key
-        @stats[key]
-      else
-        return 0
-      end
+      @stats[key] || 0
     end
 
     def dump_xml_stats
