@@ -1,9 +1,11 @@
 module HoN
   class PlayerHeroStats < Stats
     attr_accessor :heroes, :nickname
+
     def initialize(nickname)
       @nickname = nickname
       @heroes = {}
+
       begin
         url = "http://xml.heroesofnewerth.com/xml_requester.php?f=player_hero_stats&opt=nick&nick[]=#{@nickname}"
         xml_data = Net::HTTP.get_response(URI.parse(url)).body
