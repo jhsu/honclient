@@ -27,7 +27,7 @@ module HoN
     end
 
     # TODO: what happens if @heroes.has_key(hero) is false?, or if @heroes[hero].has_key?(key) is false?
-    def stats(hero,key)
+    def stats(hero, key)
       return 0 if hero.empty?
 
       if @heroes.has_key? hero

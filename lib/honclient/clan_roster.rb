@@ -19,9 +19,9 @@ module HoN
       }
     end
 
-    def ranking(by=:mmr)
+    def ranking(by = :mmr)
       results = @members.map {|nickname| player = PlayerStats.new(nickname) }
-      results.sort_by {|player| player.send(by)}.reverse
+      results.sort_by {|player| player.send(by) }.reverse
     end
   end
 end
