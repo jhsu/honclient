@@ -56,7 +56,7 @@ module HoN
         tsr_value
       end.round(2)
     rescue
-      0
+      0.0
     end
 
     def assists_per_game
