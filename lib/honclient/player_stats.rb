@@ -48,14 +48,15 @@ module HoN
         (( ((((rnk_denies/rnk_games_played)/12)*(1-((4.5/8.5)*(rnk_em_played/rnk_games_played))))*0.70)+
            ((((rnk_teamcreepkills/rnk_games_played)/93)*(1-((63/81)*(rnk_em_played/rnk_games_played))))*0.50)+
            ((rnk_wards/rnk_games_played)/1.45*0.30))*(37.5/(rnk_secs/rnk_games_played/60)))
-      if tsr_value > 10
-        10.0
-      elsif tsr_value < 0
-        0.0
-      elsif tsr_value.nan?
-        0.0
-      else
+      if (0..10).include?(tsr_value)
         tsr_value
+      elsif tsr_value > 10.0
+        10.0
+      elsif tsr_value < 0.0
+        0.0
+      elsif (0..10).include?(tsr_value)
+      else
+        0.0
       end.round(2)
     rescue
       0.0
