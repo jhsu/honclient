@@ -29,6 +29,10 @@ module HoN
       @stats
     end
 
+    def exists?
+      !stats.empty?
+    end
+
     def error?
       !!@error
     end

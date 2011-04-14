@@ -29,10 +29,6 @@ module HoN
       end
     end
 
-    def exists?
-      !stats.empty?
-    end
-
     def kdr
       (acc_herokills / acc_deaths).round(2)
     rescue ZeroDivisionError
