@@ -2,6 +2,20 @@ module HoN
   class Stats
     attr_accessor :stats
     attr_reader :error
+
+    class << self
+      attr_accessor :stat_prefix
+    end
+
+    def base_url
+      "http://xml.heroesofnewerth.com/xml_requester.php"
+    end
+
+    def fetch(method_name, args={})
+      args = args.map {|k,v| "#{k}=#{v}" }.join('&')
+      url = base_url + "?f=#{method_name}&#{args}"
+      Net::HTTP.get_response(URI.parse(url)).body
+    end
     
     def nickname
       @stats["nickname"] || "Unknown"
