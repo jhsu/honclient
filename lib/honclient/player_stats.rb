@@ -8,6 +8,10 @@ module HoN
       :games   => "acc_games_played"
     }
 
+    # Fetch player stats
+    #
+    # @param [String] nickname of player
+    # @return [PlayerStats] returns self
     def initialize(nickname)
       @nickname = nickname
       @stats = {}
@@ -20,7 +24,13 @@ module HoN
         end
       rescue SocketError
         @error = "Could not contact the Newerth XML API."
+      ensure
+        self
       end
+    end
+
+    def exists?
+      !stats.empty?
     end
 
     def kdr
@@ -29,16 +39,31 @@ module HoN
       0
     end
 
+    # KDR from matchmaking games
+    #
+    # @return [Float] kills per death ratio
     def ranked_kdr
       (rnk_herokills / rnk_deaths).round(2)
     rescue ZeroDivisionError
       0
     end
 
+    def ranked_wards_per_game
+      (rnk_wards / rnk_games_played).round(2)
+    rescue ZeroDivisionError
+      0
+    end
+
+    # MMR as displayed in the game
+    #
+    # @return [Integer] matchmaking rating
     def mmr
       rnk_amm_team_rating.to_f.round
     end
 
+    # Calculates a player's TSR (True Skill Rating 0 - 10)
+    #
+    # @return [Float] calculated TSR
     def tsr
       tsr_value = ((rnk_herokills/rnk_deaths/1.1/1.15)*0.65)+
         ((rnk_heroassists/rnk_deaths/1.55)*1.20)+
