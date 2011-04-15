@@ -15,6 +15,10 @@ module HoN
       @players.keys
     end
 
+    def hero_picks
+      @players.map {|k,stats| stats['cli_name'] }
+    end
+
     protected
 
     def map_player_stats
