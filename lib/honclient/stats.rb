@@ -1,10 +1,13 @@
 module HoN
   class Stats
-    attr_accessor :stats
+    attr_accessor :stats, :response, :nickname, :clan_tag
     attr_reader :error
 
     class << self
-      attr_accessor :stat_prefix
+      attr_accessor :stat_prefix, :sections
+      def has_sections(*sects)
+        self.sections = sects
+      end
     end
 
     def base_url
@@ -14,11 +17,18 @@ module HoN
     def fetch(method_name, args={})
       args = args.map {|k,v| "#{k}=#{v}" }.join('&')
       url = base_url + "?f=#{method_name}&#{args}"
-      Net::HTTP.get_response(URI.parse(url)).body
+      @response = Net::HTTP.get_response(URI.parse(url))
+      if @response.code == "200"
+        parse(@response.body)
+      else
+        nil
+      end
+    rescue SocketError
+      nil
     end
-    
-    def nickname
-      @stats["nickname"] || "Unknown"
+
+    def parse(response)
+      Nokogiri::XML.parse(response)
     end
 
     def stat(key)

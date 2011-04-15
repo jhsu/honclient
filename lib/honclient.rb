@@ -4,7 +4,9 @@ module HoN
   require 'cgi'
   require 'honclient/stats'
   require 'honclient/player_stats'
+  require 'honclient/match'
   require 'honclient/match_stats'
+  require 'honclient/match_history'
   require 'honclient/player_hero_stats'
   require 'honclient/clan_roster'
 end
