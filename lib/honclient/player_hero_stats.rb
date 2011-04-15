@@ -7,8 +7,7 @@ module HoN
       @nickname = nickname
       @stats = {}
 
-      xml_data = fetch(:player_hero_stats, :opt => "nick", :"nick[]" => @nickname)
-      data = Nokogiri::XML.parse(xml_data)
+      data = fetch(:player_hero_stats, :opt => "nick", :"nick[]" => @nickname)
       data.xpath("//xmlRequest/stats/player_hero_stats/hero").each do |hero_pick|
         temp = {}
         # display_name = ingame_name(hero_pick['hid'])
